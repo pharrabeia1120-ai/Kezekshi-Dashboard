@@ -44,9 +44,6 @@ export async function loadSidebar(onNavigate) {
     
     let html = await response.text();
     
-    // Replace /public/ paths with BASE_URL
-    html = html.replace(/\/public\//g, import.meta.env.BASE_URL);
-    
     document.getElementById('sidebar-container').innerHTML = html;
     
     // Setup navigation after sidebar is loaded
@@ -70,9 +67,6 @@ export async function loadHeader(onHeaderLoaded) {
     }
     
     let html = await response.text();
-    
-    // Replace /public/ paths with BASE_URL
-    html = html.replace(/\/public\//g, import.meta.env.BASE_URL);
     
     document.getElementById('header-container').innerHTML = html;
     
