@@ -34,8 +34,12 @@ function setupUserProfileDropdown() {
 // Load sidebar component
 export async function loadSidebar(onNavigate) {
   try {
-    const response = await fetch('/components/sidebar.html');
-    const html = await response.text();
+    const response = await fetch(`${import.meta.env.BASE_URL}components/sidebar.html`);
+    let html = await response.text();
+    
+    // Replace /public/ paths with BASE_URL
+    html = html.replace(/\/public\//g, import.meta.env.BASE_URL);
+    
     document.getElementById('sidebar-container').innerHTML = html;
     
     // Setup navigation after sidebar is loaded
@@ -51,8 +55,12 @@ export async function loadSidebar(onNavigate) {
 // Load header component
 export async function loadHeader(onHeaderLoaded) {
   try {
-    const response = await fetch('/components/header.html');
-    const html = await response.text();
+    const response = await fetch(`${import.meta.env.BASE_URL}components/header.html`);
+    let html = await response.text();
+    
+    // Replace /public/ paths with BASE_URL
+    html = html.replace(/\/public\//g, import.meta.env.BASE_URL);
+    
     document.getElementById('header-container').innerHTML = html;
     
     // Call callback after header is loaded

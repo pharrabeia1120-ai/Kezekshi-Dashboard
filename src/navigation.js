@@ -18,7 +18,7 @@ export function getCurrentPage() {
 // Load page content
 export async function loadPage(pageName, onPageLoaded) {
   try {
-    const response = await fetch(`/pages/${pageName}.html`);
+    const response = await fetch(`${import.meta.env.BASE_URL}pages/${pageName}.html`);
     const html = await response.text();
     document.getElementById('main-content').innerHTML = html;
     currentPage = pageName;
@@ -78,7 +78,7 @@ function updatePageControls(pageName) {
       <!-- Calendar Popover -->
       <div class="relative">
         <button id="calendar-trigger" class="w-[220px] h-11 px-5 py-2.5 text-sm font-medium rounded-lg border border-gray-200 bg-white hover:bg-gray-50 flex items-center justify-center gap-2">
-          <img src="/public/calendar.svg" class="w-5 h-5 flex-shrink-0" alt="Calendar Icon"/>
+          <img src="${import.meta.env.BASE_URL}calendar.svg" class="w-5 h-5 flex-shrink-0" alt="Calendar Icon"/>
           <span id="selected-date-text" class="truncate">Выбрать дату</span>
         </button>
         
@@ -142,7 +142,7 @@ function updatePageControls(pageName) {
       <!-- Calendar Popover -->
       <div class="relative">
         <button id="reports-calendar-trigger" class="h-11 px-5 py-2.5 text-sm font-medium rounded-lg border border-gray-200 bg-white hover:bg-gray-50 flex items-center justify-center gap-2">
-          <img src="/public/calendar.svg" class="w-5 h-5  flex-shrink-0" alt="Calendar Icon"/>
+          <img src="${import.meta.env.BASE_URL}calendar.svg" class="w-5 h-5  flex-shrink-0" alt="Calendar Icon"/>
           <span id="reports-selected-date-text" class="truncate">Выбрать дату</span>
         </button>
         
