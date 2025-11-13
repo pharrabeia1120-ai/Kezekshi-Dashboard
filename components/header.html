@@ -1,0 +1,129 @@
+<header class="bg-white border-b border-gray-200 px-6 py-4">
+    <div class="flex items-center justify-between">
+        <!-- Left: Breadcrumbs -->
+        <nav class="flex items-center space-x-2 text-sm">
+            <a href="#" class="text-gray-500 hover:text-blue-600">Dashboard</a>
+            <svg class="h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+            <span id="breadcrumb-current-page" class="text-gray-900 font-medium">Home</span>
+        </nav>
+
+        <!-- Right: Page Controls + City selector -->
+        <div class="flex items-center space-x-4">
+            <!-- Page Controls (динамически заполняется) -->
+            <div id="page-controls-container" class="flex items-center gap-4">
+            </div>
+
+            <!-- City & Schools Selector -->
+            <div class="relative inline-flex">
+                <button id="city-dropdown-btn" type="button"
+                    class="py-2.5 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-blue-200 bg-white text-gray-800 hover:bg-gray-50 focus:outline-none focus:bg-gray-50">
+                    <img src="/public/location.svg" alt="Ваша локация" class="h-4 w-4" />
+
+                    <!-- Skeleton loader -->
+                    <div id="city-skeleton" class="flex items-center gap-2">
+                        <div class="h-4 w-24 bg-gray-200 rounded animate-pulse"></div>
+                    </div>
+
+                    <!-- Actual city and schools text (hidden by default) -->
+                    <span id="selected-city-schools" class="hidden">Выберите город</span>
+
+                    <svg class="w-4 h-4" id="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="m6 9 6 6 6-6" />
+                    </svg>
+                </button>
+
+                <!-- Dropdown menu with 400px width -->
+                <div id="city-dropdown-menu"
+                    class="hidden absolute top-full right-0 mt-2 w-[400px] bg-white shadow-md rounded-lg z-50">
+                    <!-- City List View -->
+                    <div id="city-list-view" class="p-1 space-y-0.5">
+                        <div class="px-3 py-2 text-xs font-semibold text-gray-500">Казахстан</div>
+                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 cursor-pointer"
+                            data-city="Алматы">
+
+                            Алматы
+                        </a>
+                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 cursor-pointer"
+                            data-city="Астана">
+
+                            Астана
+                        </a>
+                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 cursor-pointer"
+                            data-city="Шымкент">
+
+                            Шымкент
+                        </a>
+                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 cursor-pointer"
+                            data-city="Караганда">
+
+                            Караганда
+                        </a>
+                        <a class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 cursor-pointer"
+                            data-city="Атырау">
+
+                            Атырау
+                        </a>
+                    </div>
+
+                    <!-- Schools List View (hidden by default) -->
+                    <div id="schools-list-view" class="hidden">
+                        <!-- Header with back button -->
+                        <div class="px-4 py-3 border-b border-gray-200 flex items-center gap-2">
+                            <button id="back-to-cities-btn" class="text-gray-600 hover:text-gray-800">
+                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <span id="current-city-name" class="font-semibold text-gray-800"></span>
+                        </div>
+
+                        <!-- Search input -->
+                        <div class="px-4 py-3 border-b border-gray-200">
+                            <div class="relative">
+                                <input type="text" id="schools-search-input" placeholder="Поиск школ..."
+                                    class="w-full px-3 py-2 pl-10 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                                <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Schools list with checkboxes -->
+                        <div class="p-2 max-h-[350px] overflow-y-auto">
+                            <!-- Select all option -->
+                            <label class="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-50 cursor-pointer">
+                                <input type="checkbox" id="select-all-schools"
+                                    class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <span class="text-sm font-medium text-gray-700">Выбрать все</span>
+                            </label>
+                            <div class="border-t border-gray-200 my-2"></div>
+                            <!-- Schools will be dynamically inserted here -->
+                            <div id="schools-checkboxes-container"></div>
+                        </div>
+
+                        <!-- Action buttons -->
+                        <div class="px-4 py-3 border-t border-gray-200 flex gap-2 justify-end">
+                            <button id="cancel-schools-btn"
+                                class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
+                                Отмена
+                            </button>
+                            <button id="apply-schools-btn"
+                                class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
+                                Применить
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

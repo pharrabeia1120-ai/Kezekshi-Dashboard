@@ -1,0 +1,290 @@
+<div class="space-y-6">
+    <!-- Top Section: 3 columns -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- 1) Посещение учебного заведения -->
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <div class="flex items-center justify-between mb-4 bg-blue-50 p-3 rounded-lg -m-6 mb-4">
+                <h2 class="text-lg font-semibold text-gray-900">Посещение учебного заведения:</h2>
+                <button class="refresh-chart-btn p-2 bg-white hover:bg-blue-100 rounded-lg transition-colors" data-chart="attendance">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Chart Type Tabs -->
+            <div class="flex gap-2 mb-4 border-b border-gray-200">
+                <button class="py-2 px-4 text-sm font-medium border-b-2 border-blue-600 text-blue-600 chart-type-tab active transition-all duration-200" data-chart="attendance" data-type="pie">
+                    Диаграмма
+                </button>
+                <button class="py-2 px-4 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 chart-type-tab transition-all duration-200" data-chart="attendance" data-type="bar">
+                    В процентах
+                </button>
+            </div>
+            
+            <div class="mt-4">
+                <!-- Skeleton Loader -->
+                <div class="skeleton-loader w-full" style="height: 320px;">
+                    <div class="animate-pulse flex flex-col items-center justify-center h-full">
+                        <div class="w-48 h-48 bg-gray-200 rounded-full mb-4"></div>
+                        <div class="flex gap-4">
+                            <div class="h-3 w-20 bg-gray-200 rounded"></div>
+                            <div class="h-3 w-20 bg-gray-200 rounded"></div>
+                            <div class="h-3 w-20 bg-gray-200 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pie Chart -->
+                <div id="attendance-pie-chart" class="w-full hidden" style="height: 320px;"></div>
+                
+                <!-- Bar Chart -->
+                <div id="attendance-bar-chart" class="w-full hidden" style="height: 320px;"></div>
+            </div>
+        </div>
+
+        <!-- 2) Получение питания -->
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <div class="flex items-center justify-between mb-4 bg-blue-50 p-3 rounded-lg -m-6 mb-4">
+                <h2 class="text-lg font-semibold text-gray-900">Получение питания:</h2>
+                <button class="refresh-chart-btn p-2 bg-white hover:bg-blue-100 rounded-lg transition-colors" data-chart="nutrition">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Chart Type Tabs -->
+            <div class="flex gap-2 mb-4 border-b border-gray-200">
+                <button class="py-2 px-4 text-sm font-medium border-b-2 border-blue-600 text-blue-600 chart-type-tab active transition-all duration-200" data-chart="nutrition" data-type="pie">
+                    Диаграмма
+                </button>
+                <button class="py-2 px-4 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 chart-type-tab transition-all duration-200" data-chart="nutrition" data-type="bar">
+                    В процентах
+                </button>
+            </div>
+            
+            <div class="mt-4">
+                <!-- Skeleton Loader -->
+                <div class="skeleton-loader w-full" style="height: 320px;">
+                    <div class="animate-pulse flex flex-col items-center justify-center h-full">
+                        <div class="w-48 h-48 bg-gray-200 rounded-full mb-4"></div>
+                        <div class="flex gap-4">
+                            <div class="h-3 w-20 bg-gray-200 rounded"></div>
+                            <div class="h-3 w-20 bg-gray-200 rounded"></div>
+                            <div class="h-3 w-20 bg-gray-200 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pie Chart -->
+                <div id="nutrition-pie-chart" class="w-full hidden" style="height: 320px;"></div>
+                
+                <!-- Bar Chart -->
+                <div id="nutrition-bar-chart" class="w-full hidden" style="height: 320px;"></div>
+            </div>
+        </div>
+
+        <!-- 3) Посещение библиотеки -->
+        <div class="bg-white p-6 rounded-lg border border-gray-200">
+            <div class="flex items-center justify-between mb-4 bg-blue-50 p-3 rounded-lg -m-6 mb-4">
+                <h2 class="text-lg font-semibold text-gray-900">Получение книг:</h2>
+                <button class="refresh-chart-btn p-2 bg-white hover:bg-blue-100 rounded-lg transition-colors" data-chart="library">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <!-- Chart Type Tabs -->
+            <div class="flex gap-2 mb-4 border-b border-gray-200">
+                <button class="py-2 px-4 text-sm font-medium border-b-2 border-blue-600 text-blue-600 chart-type-tab active transition-all duration-200" data-chart="library" data-type="pie">
+                    Диаграмма
+                </button>
+                <button class="py-2 px-4 text-sm font-medium border-b-2 border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 chart-type-tab transition-all duration-200" data-chart="library" data-type="bar">
+                    В процентах
+                </button>
+            </div>
+            
+            <div class="mt-4">
+                <!-- Skeleton Loader -->
+                <div class="skeleton-loader w-full" style="height: 320px;">
+                    <div class="animate-pulse flex flex-col items-center justify-center h-full">
+                        <div class="w-48 h-48 bg-gray-200 rounded-full mb-4"></div>
+                        <div class="flex gap-4">
+                            <div class="h-3 w-20 bg-gray-200 rounded"></div>
+                            <div class="h-3 w-20 bg-gray-200 rounded"></div>
+                            <div class="h-3 w-20 bg-gray-200 rounded"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pie Chart -->
+                <div id="library-pie-chart" class="w-full hidden" style="height: 320px;"></div>
+                
+                <!-- Bar Chart -->
+                <div id="library-bar-chart" class="w-full hidden" style="height: 320px;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Summary and Budget Statistics -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="bg-white border border-gray-200 rounded-lg">
+            <!-- Tabs Header -->
+            <div class="flex gap-4 px-6 pt-4 border-b border-gray-200">
+                <button id="summary-tab-btn" class="summary-budget-tab pb-3 text-sm font-medium transition-all border-b-2 border-blue-600 text-blue-600">
+                    Сводные данные
+                </button>
+                <button id="budget-tab-btn" class="summary-budget-tab pb-3 text-sm font-medium transition-all border-b-2 border-transparent text-gray-500 hover:text-gray-700">
+                    Управление бюджетом
+                </button>
+            </div>
+
+            <!-- Summary Tab Content -->
+            <div id="summary-tab-content" class="p-6">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-200">
+                <div class="flex items-center gap-2">
+                    <h3 class="text-lg font-semibold text-gray-900">Сводные данные</h3>
+                </div>
+                <div class="bg-blue-50 px-3 py-1.5 rounded-lg">
+                    <span class="text-xs font-medium text-blue-700" id="summary-date-display">Сегодня</span>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Total Students in System -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700">Всего детей в системе:</span>
+                    </div>
+                    <span class="text-lg font-bold text-gray-900">12,559</span>
+                </div>
+                
+                <!-- Students Attended Today -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700">Всего детей сегодня посетили школу:</span>
+                    </div>
+                    <span class="text-lg font-bold text-gray-900">11,547</span>
+                </div>
+                
+                <!-- Hot Meal Total -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700">Всего детей получили горячее питание:</span>
+                    </div>
+                    <span class="text-lg font-bold text-gray-900">10,234</span>
+                </div>
+                
+                <!-- Meal Grades 1-4 -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center">
+                            <span class="text-sm font-bold text-purple-600">1-4</span>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700">Получили питание дети 1-4 классов:</span>
+                    </div>
+                    <span class="text-lg font-bold text-gray-900">4,567</span>
+                </div>
+                
+                <!-- Meal Grades 5-11 -->
+                <div class="flex items-center justify-between py-3">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center">
+                            <span class="text-sm font-bold text-indigo-600">5-11</span>
+                        </div>
+                        <span class="text-sm font-medium text-gray-700">Получили питание дети 5-11 классов:</span>
+                    </div>
+                    <span class="text-lg font-bold text-gray-900">5,667</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Budget Tab Content -->
+        <div id="budget-tab-content" class="p-6 hidden">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-gray-200">
+                <div class="flex items-center gap-2">
+                    <h3 class="text-lg font-semibold text-gray-900">Управление бюджетом</h3>
+                </div>
+                <div class="bg-blue-50 px-3 py-1.5 rounded-lg">
+                    <span class="text-xs font-medium text-blue-700" id="finance-date-display">Сегодня</span>
+                </div>
+            </div>
+            
+            <div class="space-y-6">
+                <!-- Amount Saved -->
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-100">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-gray-600">Сколько сэкономлено</span>
+                        <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11.5V14m0-2.5v-6a1.5 1.5 0 113 0m-3 6a1.5 1.5 0 00-3 0v2a7.5 7.5 0 0015 0v-5a1.5 1.5 0 00-3 0m-6-3V11m0-5.5v-1a1.5 1.5 0 013 0v1m0 0V11m0-5.5a1.5 1.5 0 013 0v3m0 0V11"></path>
+                        </svg>
+                    </div>
+                    <div class="text-3xl font-bold text-gray-900">
+                        226,600 ₸
+                    </div>
+                    <div class="mt-1 flex items-center gap-1">
+                        <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                        <span class="text-xs text-green-600 font-semibold">18.1% экономия</span>
+                    </div>
+                </div>
+                
+                <!-- Planned Budget -->
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-100">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-gray-600">Запланированная сумма</span>
+                        <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-3xl font-bold text-gray-900">
+                        1,250,000 ₸
+                    </div>
+                    <div class="mt-1 text-xs text-gray-500">Бюджет на питание</div>
+                </div>
+                
+                <!-- Amount Spent -->
+                <div class="bg-gray-50 rounded-lg p-4 border border-gray-100">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-gray-600">Сколько потрачено</span>
+                        <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="text-3xl font-bold text-gray-900">
+                        1,023,400 ₸
+                    </div>
+                    <div class="mt-2">
+                        <div class="flex items-center justify-between text-xs mb-1">
+                            <span class="text-gray-500">Использовано</span>
+                            <span class="font-semibold text-gray-700">81.9%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-orange-500 h-2 rounded-full" style="width: 81.9%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</div>

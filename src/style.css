@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+body {
+    font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #fff; 
+}
+
+/* Cursor pointer for interactive elements */
+button,
+a,
+.sidebar-link,
+.period-tab,
+.chart-type-tab,
+.refresh-chart-btn,
+input[type="checkbox"],
+input[type="radio"],
+.cursor-pointer,
+[data-city],
+[data-school],
+.school-checkbox,
+#city-dropdown-btn,
+#back-to-cities-btn,
+#cancel-schools-btn,
+#apply-schools-btn,
+#select-all-schools {
+    cursor: pointer;
+}
+
+/* Period tabs - prevent size changes on state toggle */
+.period-tab {
+    min-width: fit-content;
+    white-space: nowrap;
+}
+
+/* Table row alternating background colors */
+/* "Всего внесено в систему" section - columns 3-6 (1-4, 5-11, Всего уч., Персонал) */
+#attendance-table tbody tr:nth-child(odd) td:nth-child(3),
+#attendance-table tbody tr:nth-child(odd) td:nth-child(4),
+#attendance-table tbody tr:nth-child(odd) td:nth-child(5),
+#attendance-table tbody tr:nth-child(odd) td:nth-child(6) {
+    background-color: #ffffff;
+}
+
+#attendance-table tbody tr:nth-child(even) td:nth-child(3),
+#attendance-table tbody tr:nth-child(even) td:nth-child(4),
+#attendance-table tbody tr:nth-child(even) td:nth-child(5),
+#attendance-table tbody tr:nth-child(even) td:nth-child(6) {
+    background-color: rgba(59, 130, 246, 0.05); /* transparent blue */
+}
+
+/* "Посетили на текущую дату" section - columns 7-9 (1-4, 5-11, Персонал) */
+#attendance-table tbody tr:nth-child(odd) td:nth-child(7),
+#attendance-table tbody tr:nth-child(odd) td:nth-child(8),
+#attendance-table tbody tr:nth-child(odd) td:nth-child(9) {
+    background-color: #ffffff;
+}
+
+#attendance-table tbody tr:nth-child(even) td:nth-child(7),
+#attendance-table tbody tr:nth-child(even) td:nth-child(8),
+#attendance-table tbody tr:nth-child(even) td:nth-child(9) {
+    background-color: rgba(34, 197, 94, 0.05); /* transparent green */
+}
+
+/* Keep percentage column (10) and ID/School columns (1-2) without alternating colors */
+
+/* Pagination inset-ring utility */
+.inset-ring {
+    box-shadow: inset 0 0 0 1px currentColor;
+}
+
+.inset-ring-gray-300 {
+    --tw-shadow-color: rgb(209 213 219);
+    box-shadow: inset 0 0 0 1px var(--tw-shadow-color);
+}
