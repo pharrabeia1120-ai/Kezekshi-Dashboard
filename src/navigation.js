@@ -78,9 +78,7 @@ function updatePageControls(pageName) {
       <!-- Calendar Popover -->
       <div class="relative">
         <button id="calendar-trigger" class="w-[220px] h-11 px-5 py-2.5 text-sm font-medium rounded-lg border border-gray-200 bg-white hover:bg-gray-50 flex items-center justify-center gap-2">
-          <svg class="w-5 h-5 text-gray-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
+          <img src="/public/calendar.svg" class="w-5 h-5 flex-shrink-0" alt="Calendar Icon"/>
           <span id="selected-date-text" class="truncate">Выбрать дату</span>
         </button>
         
@@ -144,9 +142,7 @@ function updatePageControls(pageName) {
       <!-- Calendar Popover -->
       <div class="relative">
         <button id="reports-calendar-trigger" class="h-11 px-5 py-2.5 text-sm font-medium rounded-lg border border-gray-200 bg-white hover:bg-gray-50 flex items-center justify-center gap-2">
-          <svg class="w-5 h-5 text-gray-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-          </svg>
+          <img src="/public/calendar.svg" class="w-5 h-5  flex-shrink-0" alt="Calendar Icon"/>
           <span id="reports-selected-date-text" class="truncate">Выбрать дату</span>
         </button>
         
