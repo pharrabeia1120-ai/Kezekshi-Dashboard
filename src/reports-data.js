@@ -2,6 +2,11 @@
 
 import { initializePagination, updatePagination, getCurrentPageData } from './pagination.js';
 import { getSelectedSchools, currentCity } from './dropdowns.js';
+import { safeDivide, createSafeElement } from './security.js';
+import { api } from './api.js';
+import { logger } from './logger.js';
+import { handleAPIError } from './error-handler.js';
+import { CONFIG } from './config.js';
 
 let currentData = [];
 let allOriginalData = [];
@@ -26,17 +31,17 @@ export function generateSchoolsData() {
     const attendedStaff = Math.floor(staff * (0.90 + Math.random() * 0.08));
     
     const totalAttended = attended14 + attended511;
-    const percentage = ((totalAttended / totalStudents) * 100).toFixed(1);
+    const percentage = safeDivide(totalAttended * 100, totalStudents, 0).toFixed(1);
 
     // Питание 1-4 классы
     const nutrition14Received = Math.floor(attended14 * (0.85 + Math.random() * 0.12));
     const nutrition14NotReceived = attended14 - nutrition14Received;
-    const nutrition14Percentage = ((nutrition14Received / attended14) * 100).toFixed(1);
+    const nutrition14Percentage = safeDivide(nutrition14Received * 100, attended14, 0).toFixed(1);
 
     // Питание 5-11 классы
     const nutrition511Received = Math.floor(attended511 * (0.80 + Math.random() * 0.15));
     const nutrition511NotReceived = attended511 - nutrition511Received;
-    const nutrition511Percentage = ((nutrition511Received / attended511) * 100).toFixed(1);
+    const nutrition511Percentage = safeDivide(nutrition511Received * 100, attended511, 0).toFixed(1);
 
     return {
       id: school.id,
@@ -215,13 +220,11 @@ function renderTableRows(dataToRender = null) {
 
   // Calculate overall percentage
   const totalAttendedStudents = attendedStudents14 + attendedStudents511;
-  const overallPercentage = totalStudents > 0 ? ((totalAttendedStudents / totalStudents) * 100).toFixed(1) : 0;
+  const overallPercentage = safeDivide(totalAttendedStudents * 100, totalStudents, 0).toFixed(1);
 
   // Calculate nutrition percentages
-  const nutrition14TotalPercentage = attendedStudents14 > 0 ? 
-    ((totalNutrition14Received / attendedStudents14) * 100).toFixed(1) : 0;
-  const nutrition511TotalPercentage = attendedStudents511 > 0 ? 
-    ((totalNutrition511Received / attendedStudents511) * 100).toFixed(1) : 0;
+  const nutrition14TotalPercentage = safeDivide(totalNutrition14Received * 100, attendedStudents14, 0).toFixed(1);
+  const nutrition511TotalPercentage = safeDivide(totalNutrition511Received * 100, attendedStudents511, 0).toFixed(1);
 
   // Render total row
   renderTotalRow({
@@ -345,7 +348,7 @@ export function initializeFilter() {
   if (!filterBtn) return;
 
   filterBtn.addEventListener('click', () => {
-    console.log('Filter button clicked');
+    logger.debug('Filter button clicked');
     // TODO: Implement filter functionality
     alert('Функция фильтрации будет добавлена позже');
   });

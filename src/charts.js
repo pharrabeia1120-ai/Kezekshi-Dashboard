@@ -4,6 +4,7 @@ import * as echarts from 'echarts';
 import { currentCity, getSelectedSchools } from './dropdowns.js';
 import { currentPeriod, currentDateRange } from './tabs.js';
 import { generateChartData, updateSummaryCards } from './utils.js';
+import { logger } from './logger.js';
 
 // Initialize ECharts for analytics page
 export function initializeCharts() {
@@ -18,17 +19,20 @@ export function initializeCharts() {
   document.getElementById('nutrition-pie-chart')?.classList.remove('hidden');
   document.getElementById('library-pie-chart')?.classList.remove('hidden');
   
-  // Initialize all charts
-  initializeAttendanceCharts();
-  initializeNutritionCharts();
-  initializeLibraryCharts();
+  // Wait for next frame to ensure DOM is fully rendered
+  requestAnimationFrame(() => {
+    // Initialize all charts
+    initializeAttendanceCharts();
+    initializeNutritionCharts();
+    initializeLibraryCharts();
+  });
 }
 
 // Initialize attendance charts
 function initializeAttendanceCharts() {
   // Attendance Pie Chart
   const attendancePieChartDom = document.getElementById('attendance-pie-chart');
-  if (attendancePieChartDom) {
+  if (attendancePieChartDom && attendancePieChartDom.clientWidth > 0) {
     const attendancePieChart = echarts.init(attendancePieChartDom);
     const attendancePieOption = {
       tooltip: {
@@ -78,7 +82,7 @@ function initializeAttendanceCharts() {
 
   // Attendance Bar Chart
   const attendanceBarChartDom = document.getElementById('attendance-bar-chart');
-  if (attendanceBarChartDom) {
+  if (attendanceBarChartDom && attendanceBarChartDom.clientWidth > 0) {
     const attendanceBarChart = echarts.init(attendanceBarChartDom);
     const attendanceBarOption = {
       animationDuration: 1000,
@@ -170,7 +174,7 @@ function initializeAttendanceCharts() {
 function initializeNutritionCharts() {
   // Nutrition Pie Chart
   const nutritionPieChartDom = document.getElementById('nutrition-pie-chart');
-  if (nutritionPieChartDom) {
+  if (nutritionPieChartDom && nutritionPieChartDom.clientWidth > 0) {
     const nutritionPieChart = echarts.init(nutritionPieChartDom);
     const nutritionPieOption = {
       tooltip: {
@@ -219,7 +223,7 @@ function initializeNutritionCharts() {
 
   // Nutrition Bar Chart
   const nutritionBarChartDom = document.getElementById('nutrition-bar-chart');
-  if (nutritionBarChartDom) {
+  if (nutritionBarChartDom && nutritionBarChartDom.clientWidth > 0) {
     const nutritionBarChart = echarts.init(nutritionBarChartDom);
     const nutritionBarOption = {
       animationDuration: 1000,
@@ -311,7 +315,7 @@ function initializeNutritionCharts() {
 function initializeLibraryCharts() {
   // Library Pie Chart
   const libraryPieChartDom = document.getElementById('library-pie-chart');
-  if (libraryPieChartDom) {
+  if (libraryPieChartDom && libraryPieChartDom.clientWidth > 0) {
     const libraryPieChart = echarts.init(libraryPieChartDom);
     const libraryPieOption = {
       tooltip: {
@@ -361,7 +365,7 @@ function initializeLibraryCharts() {
 
   // Library Bar Chart
   const libraryBarChartDom = document.getElementById('library-bar-chart');
-  if (libraryBarChartDom) {
+  if (libraryBarChartDom && libraryBarChartDom.clientWidth > 0) {
     const libraryBarChart = echarts.init(libraryBarChartDom);
     const libraryBarOption = {
       animationDuration: 1000,
@@ -509,7 +513,7 @@ export function refreshAttendanceCharts() {
     });
   }
   
-  console.log('Attendance charts refreshed');
+  logger.debug('Attendance charts refreshed');
 }
 
 // Refresh nutrition charts
@@ -541,7 +545,7 @@ export function refreshNutritionCharts() {
     });
   }
   
-  console.log('Nutrition charts refreshed');
+  logger.debug('Nutrition charts refreshed');
 }
 
 // Refresh library charts
@@ -574,12 +578,12 @@ export function refreshLibraryCharts() {
     });
   }
   
-  console.log('Library charts refreshed');
+  logger.debug('Library charts refreshed');
 }
 
 // Update all charts with current filters
 export function updateChartsWithFilters() {
-  console.log('Updating charts with filters:', { city: currentCity, period: currentPeriod, dateRange: currentDateRange });
+  logger.debug('Updating charts with filters:', { city: currentCity, period: currentPeriod, dateRange: currentDateRange });
   
   const data = generateChartData(currentCity, currentPeriod);
   

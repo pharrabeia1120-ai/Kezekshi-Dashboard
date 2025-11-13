@@ -3,6 +3,9 @@
 import { getCurrentPage } from './navigation.js';
 import { updateChartsWithFilters } from './charts.js';
 import { generateSchoolsData, renderAttendanceTable } from './reports-data.js';
+import { validateCity, sanitizeIdArray, createSafeElement } from './security.js';
+import { logger } from './logger.js';
+import { CONFIG } from './config.js';
 
 // Global state for filters
 export let currentCity = 'Астана';
@@ -114,11 +117,17 @@ export function setupCityDropdown() {
         const isChecked = tempSelectedSchools.includes(school.id);
         const label = document.createElement('label');
         label.className = 'flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-gray-50 cursor-pointer school-item';
-        label.innerHTML = `
-          <input type="checkbox" class="school-checkbox w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500" 
-                 data-school-id="${school.id}" ${isChecked ? 'checked' : ''}>
-          <span class="text-sm text-gray-700">${school.name}</span>
-        `;
+        
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'school-checkbox w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500';
+        checkbox.dataset.schoolId = school.id;
+        checkbox.checked = isChecked;
+        
+        const span = createSafeElement('span', school.name, 'text-sm text-gray-700');
+        
+        label.appendChild(checkbox);
+        label.appendChild(span);
         schoolsCheckboxesContainer.appendChild(label);
       });
       
@@ -258,20 +267,21 @@ export function setupCityDropdown() {
 
 // Update city name in header and auto-select all schools from that city
 export function updateCityName(cityName) {
+  const validatedCity = validateCity(cityName);
   const selectedCitySchoolsSpan = document.getElementById('selected-city-schools');
   if (selectedCitySchoolsSpan) {
-    selectedCitySchoolsSpan.textContent = cityName;
+    selectedCitySchoolsSpan.textContent = validatedCity;
   }
-  currentCity = cityName;
+  currentCity = validatedCity;
   
   // Auto-select all schools from detected city
-  const schools = schoolsByCity[cityName] || [];
+  const schools = schoolsByCity[validatedCity] || [];
   selectedSchools = schools.map(s => s.id);
   tempSelectedSchools = [...selectedSchools];
   
   // Update display
   if (selectedCitySchoolsSpan) {
-    selectedCitySchoolsSpan.textContent = `${cityName} (${selectedSchools.length} школ)`;
+    selectedCitySchoolsSpan.textContent = `${validatedCity} (${selectedSchools.length} школ)`;
   }
 }
 

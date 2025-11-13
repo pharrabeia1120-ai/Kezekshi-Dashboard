@@ -3,6 +3,7 @@
 import { getCurrentPage } from './navigation.js';
 import { updateChartsWithFilters } from './charts.js';
 import { updateDatePickerForPeriod } from './datepicker.js';
+import { logger } from './logger.js';
 
 // Global state for period
 export let currentPeriod = 'day';
@@ -37,7 +38,7 @@ export function initializePeriodTabs() {
       // Get selected period
       const period = tab.getAttribute('data-period');
       currentPeriod = period;
-      console.log('Selected period:', period);
+      logger.debug('Selected period:', period);
       
       // Update date picker to show the selected period
       updateDatePickerForPeriod(period);
@@ -68,7 +69,7 @@ export function initializeReportsTabs() {
       
       // Get selected category
       const category = tab.getAttribute('data-category');
-      console.log('Selected category:', category);
+      logger.debug('Selected category:', category);
       
       // Hide all content sections
       document.getElementById('attendance-content')?.classList.add('hidden');

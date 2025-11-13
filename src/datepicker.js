@@ -4,6 +4,7 @@ import { getCurrentPage } from './navigation.js';
 import { updateChartsWithFilters } from './charts.js';
 import { setDateRange } from './tabs.js';
 import { renderAttendanceTable, generateSchoolsData } from './reports-data.js';
+import { logger } from './logger.js';
 
 // Update date picker display based on selected period (Day/Week/Month)
 export function updateDatePickerForPeriod(period) {
@@ -99,7 +100,7 @@ export function updateDatePickerForPeriod(period) {
   if (summaryDateDisplay && displayText) summaryDateDisplay.textContent = displayText;
   if (financeDateDisplay && displayText) financeDateDisplay.textContent = displayText;
   
-  console.log('Date picker updated for period:', period);
+  logger.debug('Date picker updated for period:', period);
 }
 
 // Initialize date picker
@@ -171,7 +172,7 @@ export function initializeDatePicker() {
       const dateRangeText = `${formattedStart} - ${formattedEnd}`;
       selectedDateText.textContent = dateRangeText;
       setDateRange({ start: startDate, end: endDate });
-      console.log('Selected period:', startDate, '-', endDate);
+      logger.debug('Selected period:', startDate, '-', endDate);
       
       // Update summary cards date displays
       const summaryDateDisplay = document.getElementById('summary-date-display');
@@ -191,7 +192,7 @@ export function initializeDatePicker() {
       });
       selectedDateText.textContent = formattedDate;
       setDateRange({ start: startDate, end: startDate });
-      console.log('Selected date:', startDate);
+      logger.debug('Selected date:', startDate);
       
       // Update summary cards date displays
       const summaryDateDisplay = document.getElementById('summary-date-display');
@@ -436,7 +437,7 @@ export function initializeReportsDatePicker() {
         year: 'numeric' 
       });
       selectedDateText.textContent = `${formattedStart} - ${formattedEnd}`;
-      console.log('Reports: Selected period:', startDate, '-', endDate);
+      logger.debug('Reports: Selected period:', startDate, '-', endDate);
       
       // Update table based on selected date range
       if (getCurrentPage() === 'reports') {
@@ -450,7 +451,7 @@ export function initializeReportsDatePicker() {
         year: 'numeric' 
       });
       selectedDateText.textContent = formattedDate;
-      console.log('Reports: Selected date:', startDate);
+      logger.debug('Reports: Selected date:', startDate);
       
       // Update table based on selected date
       if (getCurrentPage() === 'reports') {

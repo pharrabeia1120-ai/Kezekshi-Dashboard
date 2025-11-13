@@ -1,0 +1,99 @@
+# Nginx configuration example for Kezekshi Dashboard
+# This file shows how to properly configure security headers
+
+server {
+    listen 443 ssl http2;
+    server_name kezekshi.kz www.kezekshi.kz;
+    
+    # SSL Configuration
+    ssl_certificate /etc/letsencrypt/live/kezekshi.kz/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/kezekshi.kz/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+    
+    # Root directory
+    root /var/www/kezekshi/dist;
+    index index.html;
+    
+    # Security Headers (ВАЖНО: эти заголовки нельзя установить через meta-теги!)
+    add_header X-Frame-Options "DENY" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-XSS-Protection "1; mode=block" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    
+    # Content Security Policy (дублирует meta-тег для большей безопасности)
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self';" always;
+    
+    # Permissions Policy (ограничение доступа к API браузера)
+    add_header Permissions-Policy "geolocation=(), microphone=(), camera=()" always;
+    
+    # Gzip compression
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_types text/plain text/css text/xml text/javascript application/x-javascript application/xml+rss application/json application/javascript;
+    
+    # Main location
+    location / {
+        try_files $uri $uri/ /index.html;
+        
+        # Cache control for HTML files (no cache)
+        location ~* \.html$ {
+            add_header Cache-Control "no-cache, no-store, must-revalidate";
+            add_header Pragma "no-cache";
+            add_header Expires "0";
+            
+            # Re-add security headers for HTML
+            add_header X-Frame-Options "DENY" always;
+            add_header X-Content-Type-Options "nosniff" always;
+            add_header X-XSS-Protection "1; mode=block" always;
+        }
+    }
+    
+    # Cache static assets (JS, CSS, images, fonts)
+    location ~* \.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+        
+        # Security headers for static files too
+        add_header X-Content-Type-Options "nosniff" always;
+    }
+    
+    # API proxy (если backend на том же сервере)
+    location /api {
+        proxy_pass http://localhost:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_cache_bypass $http_upgrade;
+        
+        # Security headers for API responses
+        add_header X-Content-Type-Options "nosniff" always;
+    }
+    
+    # Deny access to hidden files
+    location ~ /\. {
+        deny all;
+        access_log off;
+        log_not_found off;
+    }
+    
+    # Logging
+    access_log /var/log/nginx/kezekshi-access.log;
+    error_log /var/log/nginx/kezekshi-error.log;
+}
+
+# HTTP to HTTPS redirect
+server {
+    listen 80;
+    server_name kezekshi.kz www.kezekshi.kz;
+    
+    # Redirect all HTTP to HTTPS
+    return 301 https://$server_name$request_uri;
+}

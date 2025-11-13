@@ -1,57 +1,29 @@
 // Utils module - utility functions for the application
 
-// Detect user's city by geolocation
+import { validateCity, safeLocalStorageGet, safeLocalStorageSet } from './security.js';
+import { api } from './api.js';
+import { logger } from './logger.js';
+import { CONFIG } from './config.js';
+import { handleAPIError } from './error-handler.js';
+
+// Get user's city (defaults to Астана)
 export async function detectUserCity() {
   try {
-    // First try to get from localStorage
-    const savedCity = localStorage.getItem('userCity');
+    // Try to get from localStorage with validation
+    const savedCity = safeLocalStorageGet('userCity', validateCity, null);
     if (savedCity) {
+      logger.debug('Using saved city:', savedCity);
       return savedCity;
     }
     
-    // Get user's position
-    const position = await new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition(resolve, reject, {
-        timeout: 10000,
-        enableHighAccuracy: false
-      });
-    });
-    
-    const { latitude, longitude } = position.coords;
-    
-    // Use reverse geocoding API (Nominatim - free OpenStreetMap service)
-    const response = await fetch(
-      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&accept-language=ru`
-    );
-    const data = await response.json();
-    
-    // Map of Kazakhstan cities
-    const kazakhCities = {
-      'Астана': ['Астана', 'Nur-Sultan', 'Нур-Султан'],
-      'Алматы': ['Алматы', 'Almaty'],
-      'Шымкент': ['Шымкент', 'Shymkent'],
-      'Караганда': ['Караганда', 'Karaganda'],
-      'Актобе': ['Актобе', 'Aktobe'],
-      'Тараз': ['Тараз', 'Taraz']
-    };
-    
-    // Extract city from response
-    const detectedCity = data.address?.city || data.address?.town || data.address?.state;
-    
-    // Match to our city list
-    for (const [city, aliases] of Object.entries(kazakhCities)) {
-      if (aliases.some(alias => detectedCity?.includes(alias))) {
-        localStorage.setItem('userCity', city);
-        return city;
-      }
-    }
-    
-    // Default to Астана if city not found
-    return 'Астана';
+    // Default to Астана
+    const defaultCity = 'Астана';
+    logger.debug('Using default city:', defaultCity);
+    safeLocalStorageSet('userCity', defaultCity);
+    return defaultCity;
     
   } catch (error) {
-    console.log('Could not detect city:', error.message);
-    // Keep default city (Астана)
+    logger.error('Error getting city:', error);
     return 'Астана';
   }
 }

@@ -1,12 +1,29 @@
 {
-  "name": "my-project",
+  "name": "kezekshi-dashboard",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "Система управления школами Kezekshi",
+  "author": "Kezekshi Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pharrabeia1120-ai/Kezekshi-Dashboard.git"
+  },
+  "keywords": [
+    "dashboard",
+    "analytics",
+    "education",
+    "school-management",
+    "vite",
+    "tailwindcss"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "vite --mode development",
+    "build": "vite build --mode production",
+    "build:dev": "vite build --mode development",
+    "preview": "vite preview",
+    "clean": "rm -rf dist node_modules/.vite"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.22",

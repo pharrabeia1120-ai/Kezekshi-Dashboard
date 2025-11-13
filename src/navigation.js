@@ -1,5 +1,9 @@
 // Navigation module - handles page loading and navigation
 
+import { validatePageName } from './security.js';
+import { logger } from './logger.js';
+import { handleAPIError } from './error-handler.js';
+
 // Page titles for breadcrumbs
 const pageTitles = {
   'home': 'Главная',
@@ -18,22 +22,47 @@ export function getCurrentPage() {
 // Load page content
 export async function loadPage(pageName, onPageLoaded) {
   try {
-    const response = await fetch(`${import.meta.env.BASE_URL}pages/${pageName}.html`);
+    // Validate page name
+    const validatedPageName = validatePageName(pageName);
+    
+    const response = await fetch(`${import.meta.env.BASE_URL}pages/${validatedPageName}.html`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to load page: ${response.status}`);
+    }
+    
     const html = await response.text();
     document.getElementById('main-content').innerHTML = html;
-    currentPage = pageName;
+    currentPage = validatedPageName;
     
     // Save current page to localStorage
-    localStorage.setItem('currentPage', pageName);
+    localStorage.setItem('currentPage', validatedPageName);
     
-    updateBreadcrumb(pageName);
+    updateBreadcrumb(validatedPageName);
     
     // Call the callback to initialize page-specific features
     if (onPageLoaded) {
-      onPageLoaded(pageName);
+      onPageLoaded(validatedPageName);
     }
   } catch (error) {
-    console.error('Error loading page:', error);
+    logger.error('Error loading page:', error);
+    handleAPIError(error);
+    
+    // Show fallback error page
+    document.getElementById('main-content').innerHTML = `
+      <div class="flex items-center justify-center h-full">
+        <div class="text-center p-8">
+          <svg class="w-16 h-16 mx-auto text-gray-400 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <h2 class="text-2xl font-bold text-gray-800 mb-2">Ошибка загрузки страницы</h2>
+          <p class="text-gray-600 mb-4">Не удалось загрузить запрошенную страницу</p>
+          <button onclick="location.reload()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            Обновить
+          </button>
+        </div>
+      </div>
+    `;
   }
 }
 

@@ -1,6 +1,8 @@
 // Components module - handles loading sidebar and header components
 
 import { setupSidebarNavigation } from './navigation.js';
+import { logger } from './logger.js';
+import { handleAPIError } from './error-handler.js';
 
 // Setup user profile dropdown
 function setupUserProfileDropdown() {
@@ -35,6 +37,11 @@ function setupUserProfileDropdown() {
 export async function loadSidebar(onNavigate) {
   try {
     const response = await fetch(`${import.meta.env.BASE_URL}components/sidebar.html`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to load sidebar: ${response.status}`);
+    }
+    
     let html = await response.text();
     
     // Replace /public/ paths with BASE_URL
@@ -48,7 +55,8 @@ export async function loadSidebar(onNavigate) {
     // Setup user profile dropdown
     setupUserProfileDropdown();
   } catch (error) {
-    console.error('Error loading sidebar:', error);
+    logger.error('Error loading sidebar:', error);
+    handleAPIError(error);
   }
 }
 
@@ -56,6 +64,11 @@ export async function loadSidebar(onNavigate) {
 export async function loadHeader(onHeaderLoaded) {
   try {
     const response = await fetch(`${import.meta.env.BASE_URL}components/header.html`);
+    
+    if (!response.ok) {
+      throw new Error(`Failed to load header: ${response.status}`);
+    }
+    
     let html = await response.text();
     
     // Replace /public/ paths with BASE_URL
@@ -68,6 +81,7 @@ export async function loadHeader(onHeaderLoaded) {
       onHeaderLoaded();
     }
   } catch (error) {
-    console.error('Error loading header:', error);
+    logger.error('Error loading header:', error);
+    handleAPIError(error);
   }
 }
