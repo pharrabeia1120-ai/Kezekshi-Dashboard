@@ -44,6 +44,10 @@ export async function loadSidebar(onNavigate) {
     
     let html = await response.text();
     
+    // Fix paths for static assets on GitHub Pages
+    html = html.replace(/src="\//g, `src="${import.meta.env.BASE_URL}`);
+    html = html.replace(/href="\//g, `href="${import.meta.env.BASE_URL}`);
+    
     document.getElementById('sidebar-container').innerHTML = html;
     
     // Setup navigation after sidebar is loaded
@@ -67,6 +71,10 @@ export async function loadHeader(onHeaderLoaded) {
     }
     
     let html = await response.text();
+    
+    // Fix paths for static assets on GitHub Pages
+    html = html.replace(/src="\//g, `src="${import.meta.env.BASE_URL}`);
+    html = html.replace(/href="\//g, `href="${import.meta.env.BASE_URL}`);
     
     document.getElementById('header-container').innerHTML = html;
     
