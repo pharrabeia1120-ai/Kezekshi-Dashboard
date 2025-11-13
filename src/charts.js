@@ -14,10 +14,13 @@ export function initializeCharts() {
     skeleton.classList.add('hidden');
   });
   
-  // Show pie charts by default
+  // Temporarily show all charts for initialization
   document.getElementById('attendance-pie-chart')?.classList.remove('hidden');
   document.getElementById('nutrition-pie-chart')?.classList.remove('hidden');
   document.getElementById('library-pie-chart')?.classList.remove('hidden');
+  document.getElementById('attendance-bar-chart')?.classList.remove('hidden');
+  document.getElementById('nutrition-bar-chart')?.classList.remove('hidden');
+  document.getElementById('library-bar-chart')?.classList.remove('hidden');
   
   // Wait for next frame to ensure DOM is fully rendered
   requestAnimationFrame(() => {
@@ -25,6 +28,11 @@ export function initializeCharts() {
     initializeAttendanceCharts();
     initializeNutritionCharts();
     initializeLibraryCharts();
+    
+    // Hide bar charts after initialization (pie charts are shown by default)
+    document.getElementById('attendance-bar-chart')?.classList.add('hidden');
+    document.getElementById('nutrition-bar-chart')?.classList.add('hidden');
+    document.getElementById('library-bar-chart')?.classList.add('hidden');
   });
 }
 
@@ -536,10 +544,10 @@ export function refreshNutritionCharts() {
     barChart.setOption({
       series: [
         {
-          data: [75, 62, 68]
+          data: [75, 62]
         },
         {
-          data: [25, 38, 32]
+          data: [25, 38]
         }
       ]
     });

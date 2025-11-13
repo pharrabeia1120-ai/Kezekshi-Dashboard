@@ -342,14 +342,3 @@ export function initializeSearch(allData) {
   });
 }
 
-// Initialize filter button (placeholder for future functionality)
-export function initializeFilter() {
-  const filterBtn = document.getElementById('filter-btn');
-  if (!filterBtn) return;
-
-  filterBtn.addEventListener('click', () => {
-    logger.debug('Filter button clicked');
-    // TODO: Implement filter functionality
-    alert('Функция фильтрации будет добавлена позже');
-  });
-}

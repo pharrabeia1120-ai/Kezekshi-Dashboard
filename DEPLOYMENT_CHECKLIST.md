@@ -168,12 +168,3 @@ curl -I https://kezekshi.kz | grep -E "(X-Frame|X-Content|Strict)"
 openssl s_client -connect kezekshi.kz:443 -servername kezekshi.kz
 ```
 
-## 📞 Контакты при проблемах
-
-- Frontend issues: [GitHub Issues](https://github.com/pharrabeia1120-ai/Kezekshi-Dashboard/issues)
-- Backend API: См. BACKEND_API.md
-- Security: private security advisory
-
-## 🎉 Success!
-
-Если все пункты выполнены, проект готов к production! 🚀
