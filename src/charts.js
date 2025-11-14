@@ -78,9 +78,9 @@ function initializeAttendanceCharts() {
             show: true
           },
           data: [
-            { value: 456, name: '1-4 классы', itemStyle: { color: '#0075F6' } },
-            { value: 350, name: '5-11 классы', itemStyle: { color: '#84cc16' } },
-            { value: 280, name: 'Персонал', itemStyle: { color: '#fb923c' } }
+            { value: 456, name: '1-4 классы', itemStyle: { color: '#60a5fa' } },
+            { value: 350, name: '5-11 классы', itemStyle: { color: '#34d399' } },
+            { value: 280, name: 'Персонал', itemStyle: { color: '#fbbf24' } }
           ]
         }
       ]
@@ -149,7 +149,7 @@ function initializeAttendanceCharts() {
           stack: 'total',
           data: [69, 56, 63],
           itemStyle: {
-            color: '#0075F6'
+            color: '#60a5fa'
           },
           barWidth: '60%',
           label: {
@@ -166,7 +166,7 @@ function initializeAttendanceCharts() {
           stack: 'total',
           data: [31, 44, 37],
           itemStyle: {
-            color: 'rgba(239, 68, 68, 0.6)'
+            color: '#d1d5db'
           },
           label: {
             show: false
@@ -220,8 +220,8 @@ function initializeNutritionCharts() {
             show: true
           },
           data: [
-            { value: 410, name: '1-4 классы', itemStyle: { color: '#0075F6' } },
-            { value: 320, name: '5-11 классы', itemStyle: { color: '#84cc16' } }
+            { value: 410, name: '1-4 классы', itemStyle: { color: '#60a5fa' } },
+            { value: 320, name: '5-11 классы', itemStyle: { color: '#34d399' } }
           ]
         }
       ]
@@ -290,7 +290,7 @@ function initializeNutritionCharts() {
           stack: 'total',
           data: [75, 62],
           itemStyle: {
-            color: '#0075F6'
+            color: '#60a5fa'
           },
           barWidth: '60%',
           label: {
@@ -307,7 +307,7 @@ function initializeNutritionCharts() {
           stack: 'total',
           data: [25, 38],
           itemStyle: {
-            color: 'rgba(239, 68, 68, 0.6)'
+            color: '#d1d5db'
           },
           label: {
             show: false
@@ -361,9 +361,9 @@ function initializeLibraryCharts() {
             show: true
           },
           data: [
-            { value: 320, name: '1-4 классы', itemStyle: { color: '#0075F6' } },
-            { value: 280, name: '5-11 классы', itemStyle: { color: '#84cc16' } },
-            { value: 150, name: 'Персонал', itemStyle: { color: '#fb923c' } }
+            { value: 320, name: '1-4 классы', itemStyle: { color: '#60a5fa' } },
+            { value: 280, name: '5-11 классы', itemStyle: { color: '#34d399' } },
+            { value: 150, name: 'Персонал', itemStyle: { color: '#fbbf24' } }
           ]
         }
       ]
@@ -432,7 +432,7 @@ function initializeLibraryCharts() {
           stack: 'total',
           data: [65, 58, 52],
           itemStyle: {
-            color: '#0075F6'
+            color: '#60a5fa'
           },
           barWidth: '60%',
           label: {
@@ -449,7 +449,7 @@ function initializeLibraryCharts() {
           stack: 'total',
           data: [35, 42, 48],
           itemStyle: {
-            color: 'rgba(239, 68, 68, 0.6)'
+            color: '#d1d5db'
           },
           label: {
             show: false
@@ -500,9 +500,9 @@ export function refreshAttendanceCharts() {
     pieChart.setOption({
       series: [{
         data: [
-          { value: 450, name: '1-4 классы', itemStyle: { color: '#0075F6' } },
-          { value: 595, name: '5-11 классы', itemStyle: { color: '#84cc16' } },
-          { value: 189, name: 'Персонал', itemStyle: { color: '#fb923c' } }
+          { value: 450, name: '1-4 классы', itemStyle: { color: '#60a5fa' } },
+          { value: 595, name: '5-11 классы', itemStyle: { color: '#34d399' } },
+          { value: 189, name: 'Персонал', itemStyle: { color: '#fbbf24' } }
         ]
       }]
     });
@@ -533,8 +533,8 @@ export function refreshNutritionCharts() {
     pieChart.setOption({
       series: [{
         data: [
-          { value: 456, name: '1-4 классы', itemStyle: { color: '#0075F6' } },
-          { value: 531, name: '5-11 классы', itemStyle: { color: '#84cc16' } }
+          { value: 456, name: '1-4 классы', itemStyle: { color: '#60a5fa' } },
+          { value: 531, name: '5-11 классы', itemStyle: { color: '#34d399' } }
         ]
       }]
     });
@@ -565,9 +565,9 @@ export function refreshLibraryCharts() {
     pieChart.setOption({
       series: [{
         data: [
-          { value: 234, name: '1-4 классы', itemStyle: { color: '#0075F6' } },
-          { value: 289, name: '5-11 классы', itemStyle: { color: '#84cc16' } },
-          { value: 156, name: 'Персонал', itemStyle: { color: '#fb923c' } }
+          { value: 234, name: '1-4 классы', itemStyle: { color: '#60a5fa' } },
+          { value: 289, name: '5-11 классы', itemStyle: { color: '#34d399' } },
+          { value: 156, name: 'Персонал', itemStyle: { color: '#fbbf24' } }
         ]
       }]
     });

@@ -2,7 +2,7 @@
 
 body {
     font-family: "Montserrat", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: #fff; 
+    background-color: #f5f9fd;
 }
 
 /* Cursor pointer for interactive elements */
@@ -10,6 +10,7 @@ button,
 a,
 .sidebar-link,
 .period-tab,
+.reports-period-tab,
 .chart-type-tab,
 .refresh-chart-btn,
 input[type="checkbox"],
@@ -27,7 +28,8 @@ input[type="radio"],
 }
 
 /* Period tabs - prevent size changes on state toggle */
-.period-tab {
+.period-tab,
+.reports-period-tab {
     min-width: fit-content;
     white-space: nowrap;
 }
@@ -71,4 +73,16 @@ input[type="radio"],
 .inset-ring-gray-300 {
     --tw-shadow-color: rgb(209 213 219);
     box-shadow: inset 0 0 0 1px var(--tw-shadow-color);
+}
+
+/* Custom styling for select dropdowns - add padding for the arrow icon */
+select {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.5rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }

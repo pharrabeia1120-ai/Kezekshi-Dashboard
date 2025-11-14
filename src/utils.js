@@ -84,9 +84,9 @@ export function generateChartData(city, period) {
   return {
     attendance: {
       pie: [
-        { value: Math.round(450 * baseMultiplier * random()), name: '1-4 классы', itemStyle: { color: '#0075F6' } },
-        { value: Math.round(595 * baseMultiplier * random()), name: '5-11 классы', itemStyle: { color: '#84cc16' } },
-        { value: Math.round(189 * baseMultiplier * random()), name: 'Персонал', itemStyle: { color: '#fb923c' } }
+        { value: Math.round(450 * baseMultiplier * random()), name: '1-4 классы', itemStyle: { color: '#60a5fa' } },
+        { value: Math.round(595 * baseMultiplier * random()), name: '5-11 классы', itemStyle: { color: '#34d399' } },
+        { value: Math.round(189 * baseMultiplier * random()), name: 'Персонал', itemStyle: { color: '#fbbf24' } }
       ],
       bar: {
         present: [
@@ -103,8 +103,8 @@ export function generateChartData(city, period) {
     },
     nutrition: {
       pie: [
-        { value: Math.round(456 * baseMultiplier * random()), name: '1-4 классы', itemStyle: { color: '#0075F6' } },
-        { value: Math.round(531 * baseMultiplier * random()), name: '5-11 классы', itemStyle: { color: '#84cc16' } }
+        { value: Math.round(456 * baseMultiplier * random()), name: '1-4 классы', itemStyle: { color: '#60a5fa' } },
+        { value: Math.round(531 * baseMultiplier * random()), name: '5-11 классы', itemStyle: { color: '#34d399' } }
       ],
       bar: {
         received: [
@@ -121,9 +121,9 @@ export function generateChartData(city, period) {
     },
     library: {
       pie: [
-        { value: Math.round(234 * baseMultiplier * random()), name: '1-4 классы', itemStyle: { color: '#0075F6' } },
-        { value: Math.round(289 * baseMultiplier * random()), name: '5-11 классы', itemStyle: { color: '#84cc16' } },
-        { value: Math.round(156 * baseMultiplier * random()), name: 'Персонал', itemStyle: { color: '#fb923c' } }
+        { value: Math.round(234 * baseMultiplier * random()), name: '1-4 классы', itemStyle: { color: '#60a5fa' } },
+        { value: Math.round(289 * baseMultiplier * random()), name: '5-11 классы', itemStyle: { color: '#34d399' } },
+        { value: Math.round(156 * baseMultiplier * random()), name: 'Персонал', itemStyle: { color: '#fbbf24' } }
       ],
       bar: {
         visited: [
@@ -167,7 +167,7 @@ export function updateSummaryCards(summary) {
   });
   
   // Update savings
-  const savingsElement = document.querySelector('.bg-gradient-to-r .text-3xl');
+  const savingsElement = document.querySelector('.bg-gradient-to-r .text-2xl');
   if (savingsElement) {
     savingsElement.textContent = `₽${summary.savings.toLocaleString('ru-RU')}`;
   }

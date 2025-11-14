@@ -187,29 +187,29 @@ function renderTableRows(dataToRender = null) {
     tr.innerHTML = `
       <td class="px-4 py-3 text-sm font-semibold text-gray-900 border-r border-gray-200">${row.id}</td>
       <td class="px-4 py-3 text-sm font-semibold text-gray-900 border-r border-gray-200">${row.name}</td>
-      <td class="px-4 py-3 text-base font-semibold text-gray-900 text-center border-r border-gray-200">${row.system.students14}</td>
-      <td class="px-4 py-3 text-base font-semibold text-gray-900 text-center border-r border-gray-200">${row.system.students511}</td>
-      <td class="px-4 py-3 text-base font-semibold text-gray-900 text-center border-r border-gray-200">${row.system.totalStudents}</td>
-      <td class="px-4 py-3 text-base font-semibold text-gray-900 text-center border-r border-gray-200">${row.system.staff}</td>
-      <td class="px-4 py-3 text-base font-semibold text-gray-900 text-center border-r border-gray-200">${row.attended.students14}</td>
-      <td class="px-4 py-3 text-base font-semibold text-gray-900 text-center border-r border-gray-200">${row.attended.students511}</td>
-      <td class="px-4 py-3 text-base font-semibold text-gray-900 text-center border-r border-gray-200">${row.attended.staff}</td>
+      <td class="px-4 py-3 text-base font-medium text-gray-900 text-center border-r border-gray-200">${row.system.students14}</td>
+      <td class="px-4 py-3 text-base font-medium text-gray-900 text-center border-r border-gray-200">${row.system.students511}</td>
+      <td class="px-4 py-3 text-base font-medium text-gray-900 text-center border-r border-gray-200">${row.system.totalStudents}</td>
+      <td class="px-4 py-3 text-base font-medium text-gray-900 text-center border-r border-gray-200">${row.system.staff}</td>
+      <td class="px-4 py-3 text-base font-medium text-gray-900 text-center border-r border-gray-200">${row.attended.students14}</td>
+      <td class="px-4 py-3 text-base font-medium text-gray-900 text-center border-r border-gray-200">${row.attended.students511}</td>
+      <td class="px-4 py-3 text-base font-medium text-gray-900 text-center border-r border-gray-200">${row.attended.staff}</td>
       <td class="px-4 py-3 text-center border-r border-gray-200">
-        <span class="whitespace-nowrap rounded-full px-2.5 py-1 text-sm font-bold ${badgeColor}">
+        <span class="whitespace-nowrap rounded-full px-2.5 py-1 text-sm font-semibold ${badgeColor}">
           ${row.attended.percentage}%
         </span>
       </td>
-      <td class="px-4 py-3 text-base font-semibold text-gray-900 text-center border-r border-gray-200">${row.nutrition14.received}</td>
-      <td class="px-4 py-3 text-base font-semibold text-gray-900 text-center border-r border-gray-200">${row.nutrition14.notReceived}</td>
+      <td class="px-4 py-3 text-base font-medium text-gray-900 text-center border-r border-gray-200">${row.nutrition14.received}</td>
+      <td class="px-4 py-3 text-base font-medium text-gray-900 text-center border-r border-gray-200">${row.nutrition14.notReceived}</td>
       <td class="px-4 py-3 text-center border-r border-gray-200">
-        <span class="whitespace-nowrap rounded-full px-2.5 py-1 text-sm font-bold ${nutrition14BadgeColor}">
+        <span class="whitespace-nowrap rounded-full px-2.5 py-1 text-sm font-semibold ${nutrition14BadgeColor}">
           ${row.nutrition14.percentage}%
         </span>
       </td>
-      <td class="px-4 py-3 text-base font-semibold text-gray-900 text-center border-r border-gray-200">${row.nutrition511.received}</td>
-      <td class="px-4 py-3 text-base font-semibold text-gray-900 text-center border-r border-gray-200">${row.nutrition511.notReceived}</td>
+      <td class="px-4 py-3 text-base font-medium text-gray-900 text-center border-r border-gray-200">${row.nutrition511.received}</td>
+      <td class="px-4 py-3 text-base font-medium text-gray-900 text-center border-r border-gray-200">${row.nutrition511.notReceived}</td>
       <td class="px-4 py-3 text-center">
-        <span class="whitespace-nowrap rounded-full px-2.5 py-1 text-sm font-bold ${nutrition511BadgeColor}">
+        <span class="whitespace-nowrap rounded-full px-2.5 py-1 text-sm font-semibold ${nutrition511BadgeColor}">
           ${row.nutrition511.percentage}%
         </span>
       </td>
@@ -287,29 +287,29 @@ function renderTotalRow(totals) {
           Всего:
         </span>
       </td>
-      <td class="px-4 py-4 text-base font-bold text-gray-900 text-center border-r border-blue-200">${totals.totalStudents14 || 0}</td>
-      <td class="px-4 py-4 text-base font-bold text-gray-900 text-center border-r border-blue-200">${totals.totalStudents511 || 0}</td>
-      <td class="px-4 py-4 text-base font-bold text-gray-900 text-center border-r border-blue-200">${totals.totalStudents || 0}</td>
-      <td class="px-4 py-4 text-base font-bold text-gray-900 text-center border-r border-blue-200">${totals.totalStaff || 0}</td>
-      <td class="px-4 py-4 text-base font-bold text-gray-900 text-center border-r border-blue-200">${totals.attendedStudents14 || 0}</td>
-      <td class="px-4 py-4 text-base font-bold text-gray-900 text-center border-r border-blue-200">${totals.attendedStudents511 || 0}</td>
-      <td class="px-4 py-4 text-base font-bold text-gray-900 text-center border-r border-blue-200">${totals.attendedStaff || 0}</td>
+      <td class="px-4 py-4 text-base font-semibold text-gray-900 text-center border-r border-blue-200">${totals.totalStudents14 || 0}</td>
+      <td class="px-4 py-4 text-base font-semibold text-gray-900 text-center border-r border-blue-200">${totals.totalStudents511 || 0}</td>
+      <td class="px-4 py-4 text-base font-semibold text-gray-900 text-center border-r border-blue-200">${totals.totalStudents || 0}</td>
+      <td class="px-4 py-4 text-base font-semibold text-gray-900 text-center border-r border-blue-200">${totals.totalStaff || 0}</td>
+      <td class="px-4 py-4 text-base font-semibold text-gray-900 text-center border-r border-blue-200">${totals.attendedStudents14 || 0}</td>
+      <td class="px-4 py-4 text-base font-semibold text-gray-900 text-center border-r border-blue-200">${totals.attendedStudents511 || 0}</td>
+      <td class="px-4 py-4 text-base font-semibold text-gray-900 text-center border-r border-blue-200">${totals.attendedStaff || 0}</td>
       <td class="px-4 py-4 text-center border-r border-blue-200">
-        <span class="whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-bold ${badgeColor}">
+        <span class="whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-semibold ${badgeColor}">
           ${totals.percentage || 0}%
         </span>
       </td>
-      <td class="px-4 py-4 text-base font-bold text-gray-900 text-center border-r border-blue-200">${totals.nutrition14Received || 0}</td>
-      <td class="px-4 py-4 text-base font-bold text-gray-900 text-center border-r border-blue-200">${totals.nutrition14NotReceived || 0}</td>
+      <td class="px-4 py-4 text-base font-semibold text-gray-900 text-center border-r border-blue-200">${totals.nutrition14Received || 0}</td>
+      <td class="px-4 py-4 text-base font-semibold text-gray-900 text-center border-r border-blue-200">${totals.nutrition14NotReceived || 0}</td>
       <td class="px-4 py-4 text-center border-r border-blue-200">
-        <span class="whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-bold ${nutrition14BadgeColor}">
+        <span class="whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-semibold ${nutrition14BadgeColor}">
           ${totals.nutrition14Percentage || 0}%
         </span>
       </td>
-      <td class="px-4 py-4 text-base font-bold text-gray-900 text-center border-r border-blue-200">${totals.nutrition511Received || 0}</td>
-      <td class="px-4 py-4 text-base font-bold text-gray-900 text-center border-r border-blue-200">${totals.nutrition511NotReceived || 0}</td>
+      <td class="px-4 py-4 text-base font-semibold text-gray-900 text-center border-r border-blue-200">${totals.nutrition511Received || 0}</td>
+      <td class="px-4 py-4 text-base font-semibold text-gray-900 text-center border-r border-blue-200">${totals.nutrition511NotReceived || 0}</td>
       <td class="px-4 py-4 text-center">
-        <span class="whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-bold ${nutrition511BadgeColor}">
+        <span class="whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-semibold ${nutrition511BadgeColor}">
           ${totals.nutrition511Percentage || 0}%
         </span>
       </td>

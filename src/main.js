@@ -12,6 +12,7 @@ import { validatePageName } from './security.js';
 import { initErrorHandlers } from './error-handler.js';
 import { logger } from './logger.js';
 import { CONFIG } from './config.js';
+import { initializeMonthlySavingsChart } from './monthly-chart.js';
 
 // Handle page-specific initialization
 function handlePageInit(pageName) {
@@ -37,6 +38,7 @@ function handlePageInit(pageName) {
       initializeRefreshButtons();
       initializeChartTypeTabs();
       initializeSummaryBudgetTabs();
+      initializeMonthlySavingsChart();
       animateCounters();
     }, CONFIG.CHART_INIT_DELAY);
   }

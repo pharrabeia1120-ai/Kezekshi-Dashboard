@@ -168,10 +168,26 @@ function updatePageControls(pageName) {
     `;
   } else if (pageName === 'reports') {
     controlsContainer.innerHTML = `
+      <!-- Period Tabs -->
+      <div class="inline-flex rounded-lg border border-gray-200 p-1 bg-gray-50 h-11 items-center gap-1">
+        <button class="w-[85px] py-2 text-sm font-medium rounded-md transition-all bg-white text-blue-600 reports-period-tab tab-active" data-period="today">
+          Сегодня
+        </button>
+        <button class="w-[85px] py-2 text-sm font-medium rounded-md transition-all text-gray-700 hover:text-gray-900 hover:bg-gray-100 reports-period-tab" data-period="yesterday">
+          Вчера
+        </button>
+        <button class="w-[85px] py-2 text-sm font-medium rounded-md transition-all text-gray-700 hover:text-gray-900 hover:bg-gray-100 reports-period-tab" data-period="week">
+          Неделя
+        </button>
+        <button class="w-[85px] py-2 text-sm font-medium rounded-md transition-all text-gray-700 hover:text-gray-900 hover:bg-gray-100 reports-period-tab" data-period="month">
+          Месяц
+        </button>
+      </div>
+      
       <!-- Calendar Popover -->
       <div class="relative">
-        <button id="reports-calendar-trigger" class="h-11 px-5 py-2.5 text-sm font-medium rounded-lg border border-gray-200 bg-white hover:bg-gray-50 flex items-center justify-center gap-2">
-          <img src="${import.meta.env.BASE_URL}calendar.svg" class="w-5 h-5  flex-shrink-0" alt="Calendar Icon"/>
+        <button id="reports-calendar-trigger" class="w-[220px] h-11 px-5 py-2.5 text-sm font-medium rounded-lg border border-gray-200 bg-white hover:bg-gray-50 flex items-center justify-center gap-2">
+          <img src="${import.meta.env.BASE_URL}calendar.svg" class="w-5 h-5 flex-shrink-0" alt="Calendar Icon"/>
           <span id="reports-selected-date-text" class="truncate">Выбрать дату</span>
         </button>
         

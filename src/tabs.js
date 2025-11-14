@@ -3,6 +3,7 @@
 import { getCurrentPage } from './navigation.js';
 import { updateChartsWithFilters } from './charts.js';
 import { updateDatePickerForPeriod } from './datepicker.js';
+import { generateSchoolsData, renderAttendanceTable } from './reports-data.js';
 import { logger } from './logger.js';
 
 // Global state for period
@@ -80,6 +81,88 @@ export function initializeReportsTabs() {
       document.getElementById(`${category}-content`)?.classList.remove('hidden');
     });
   });
+  
+  // Initialize reports period tabs
+  initializeReportsPeriodTabs();
+}
+
+// Initialize Reports Period Tabs (called after page load)
+export function initializeReportsPeriodTabs() {
+  const periodTabs = document.querySelectorAll('.reports-period-tab');
+  
+  periodTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Remove active state from all period tabs
+      periodTabs.forEach(t => {
+        t.classList.remove('bg-white', 'text-blue-600', 'tab-active');
+        t.classList.add('text-gray-700', 'hover:text-gray-900', 'hover:bg-gray-100');
+      });
+      
+      // Add active state to clicked tab
+      tab.classList.remove('text-gray-700', 'hover:text-gray-900', 'hover:bg-gray-100');
+      tab.classList.add('bg-white', 'text-blue-600', 'tab-active');
+      
+      // Get selected period
+      const period = tab.getAttribute('data-period');
+      logger.debug('Selected reports period:', period);
+      
+      // Update reports data based on period
+      updateReportsPeriod(period);
+    });
+  });
+}
+
+// Update reports data based on selected period
+function updateReportsPeriod(period) {
+  // This function will be called when period changes
+  logger.debug('Updating reports for period:', period);
+  
+  // Regenerate table data with period-specific logic
+  const tableData = generateSchoolsData();
+  
+  // Apply period multiplier to simulate different data for different periods
+  const periodMultiplier = {
+    'today': 1.0,
+    'yesterday': 0.95,
+    'week': 1.1,
+    'month': 1.3
+  };
+  
+  const multiplier = periodMultiplier[period] || 1.0;
+  
+  // Adjust data based on period
+  const adjustedData = tableData.map(row => ({
+    ...row,
+    system: {
+      ...row.system,
+      students14: Math.floor(row.system.students14 * multiplier),
+      students511: Math.floor(row.system.students511 * multiplier),
+      totalStudents: Math.floor(row.system.totalStudents * multiplier),
+      staff: Math.floor(row.system.staff * multiplier)
+    },
+    attended: {
+      ...row.attended,
+      students14: Math.floor(row.attended.students14 * multiplier),
+      students511: Math.floor(row.attended.students511 * multiplier),
+      staff: Math.floor(row.attended.staff * multiplier),
+      percentage: row.attended.percentage
+    },
+    nutrition14: {
+      ...row.nutrition14,
+      received: Math.floor(row.nutrition14.received * multiplier),
+      notReceived: Math.floor(row.nutrition14.notReceived * multiplier)
+    },
+    nutrition511: {
+      ...row.nutrition511,
+      received: Math.floor(row.nutrition511.received * multiplier),
+      notReceived: Math.floor(row.nutrition511.notReceived * multiplier)
+    }
+  }));
+  
+  // Re-render table with adjusted data
+  renderAttendanceTable(adjustedData);
+  
+  logger.debug(`Reports table updated for period: ${period}`);
 }
 
 // Initialize Summary/Budget Tabs
